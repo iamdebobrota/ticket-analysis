@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { DataProvider, useData } from './context/DataContext';
 import UploadZone from './components/UploadZone';
 import FilterBar from './components/FilterBar';
+import InsightsBanner from './components/InsightsBanner';
 import TabBar from './components/TabBar';
 import OverviewTab from './components/overview/OverviewTab';
 import SupportTab from './components/support/SupportTab';
@@ -14,14 +15,15 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
-        <h1 className="text-xl font-semibold">Ticket Analysis Dashboard</h1>
+      <header className="bg-white border-b border-gray-200 shadow-sm px-4 sm:px-6 py-4">
+        <h1 className="text-lg sm:text-xl font-semibold text-gray-900">Ticket Analysis Dashboard</h1>
       </header>
-      <main className="max-w-7xl mx-auto p-6">
+      <main className="max-w-7xl mx-auto p-3 sm:p-6">
         <UploadZone />
         {hasData && (
           <>
             <FilterBar />
+            <InsightsBanner />
             <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
             {activeTab === 'overview' && <OverviewTab />}
             {activeTab === 'support' && <SupportTab />}
