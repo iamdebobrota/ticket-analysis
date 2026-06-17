@@ -31,7 +31,7 @@ export default function DailyActivityChart() {
   const { metrics, agents, filteredTickets, openDrillDown } = useData();
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4 min-h-[300px]">
       <h3 className="text-sm font-medium text-gray-700 mb-3">Daily Activity by Agent</h3>
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={metrics.agentDailyActivity}>

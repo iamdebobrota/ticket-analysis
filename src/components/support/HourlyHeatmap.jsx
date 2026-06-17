@@ -16,7 +16,7 @@ export default function HourlyHeatmap() {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4 min-h-[300px]">
       <h3 className="text-sm font-medium text-gray-700 mb-3">Hourly Activity Heatmap (UTC)</h3>
       <div className="overflow-x-auto">
         <div className="inline-grid gap-px" style={{ gridTemplateColumns: `60px repeat(24, 1fr)` }}>
@@ -36,7 +36,7 @@ export default function HourlyHeatmap() {
                   <div
                     key={`${dayIdx}-${hour}`}
                     title={`${day} ${hour}:00 — ${count} tickets`}
-                    className="w-5 h-5 rounded-sm cursor-pointer hover:ring-2 hover:ring-blue-400"
+                    className="w-5 h-5 rounded-sm cursor-pointer hover:ring-2 hover:ring-blue-400 transition-shadow"
                     style={{ backgroundColor: bg }}
                     onClick={() => handleCellClick(dayIdx, hour, day)}
                   />

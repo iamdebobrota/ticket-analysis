@@ -61,7 +61,7 @@ export default function TicketList() {
   ];
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 mt-4">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4 mt-4">
       <h3 className="text-sm font-medium text-gray-700 mb-3">Tickets ({sorted.length})</h3>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
@@ -71,7 +71,7 @@ export default function TicketList() {
                 <th
                   key={col.key}
                   onClick={() => handleSort(col.key)}
-                  className="pb-2 pr-3 cursor-pointer hover:text-gray-700"
+                  className="pb-2 pr-3 cursor-pointer hover:text-gray-700 whitespace-nowrap sticky top-0 bg-white"
                 >
                   {col.label} {sortField === col.key && (sortDir === 'asc' ? '↑' : '↓')}
                 </th>
@@ -83,12 +83,12 @@ export default function TicketList() {
               <React.Fragment key={ticket.id}>
                 <tr
                   onClick={() => setExpandedId(expandedId === ticket.id ? null : ticket.id)}
-                  className="border-b border-gray-100 cursor-pointer hover:bg-gray-50"
+                  className="border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors"
                 >
-                  <td className="py-2 pr-3">{ticket.customerName}</td>
+                  <td className="py-2 pr-3 whitespace-nowrap">{ticket.customerName}</td>
                   <td className="py-2 pr-3 max-w-[200px] truncate">{ticket.title || ticket.initialMessage?.slice(0, 50)}</td>
-                  <td className="py-2 pr-3">{ticket.agentName || '—'}</td>
-                  <td className="py-2 pr-3">{formatTime(ticket.timeToAdminReply)}</td>
+                  <td className="py-2 pr-3 whitespace-nowrap">{ticket.agentName || '—'}</td>
+                  <td className="py-2 pr-3 whitespace-nowrap">{formatTime(ticket.timeToAdminReply)}</td>
                   <td className="py-2 pr-3">
                     <span className={`text-xs px-2 py-0.5 rounded-full ${
                       ticket.state === 'closed' ? 'bg-green-100 text-green-700' :
@@ -140,22 +140,22 @@ export default function TicketList() {
         </table>
       </div>
       {totalPages > 1 && (
-        <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+        <div className="flex flex-col sm:flex-row items-center justify-between mt-4 pt-3 border-t border-gray-100 gap-2">
           <div className="text-xs text-gray-500">
             Showing {pageStart + 1}–{Math.min(pageStart + PAGE_SIZE, sorted.length)} of {sorted.length}
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 flex-wrap justify-center">
             <button
               onClick={() => { setCurrentPage(1); setExpandedId(null); }}
               disabled={safeCurrentPage === 1}
-              className="px-2 py-1 text-xs rounded border border-gray-300 disabled:opacity-40 hover:bg-gray-50 disabled:hover:bg-white"
+              className="px-2 py-1 text-xs rounded-lg border border-gray-300 disabled:opacity-40 hover:bg-gray-50 disabled:hover:bg-white transition-colors"
             >
               First
             </button>
             <button
               onClick={() => { setCurrentPage(p => Math.max(1, p - 1)); setExpandedId(null); }}
               disabled={safeCurrentPage === 1}
-              className="px-2 py-1 text-xs rounded border border-gray-300 disabled:opacity-40 hover:bg-gray-50 disabled:hover:bg-white"
+              className="px-2 py-1 text-xs rounded-lg border border-gray-300 disabled:opacity-40 hover:bg-gray-50 disabled:hover:bg-white transition-colors"
             >
               Prev
             </button>
@@ -173,7 +173,7 @@ export default function TicketList() {
                   <button
                     key={item}
                     onClick={() => { setCurrentPage(item); setExpandedId(null); }}
-                    className={`px-2 py-1 text-xs rounded border ${
+                    className={`px-2 py-1 text-xs rounded-lg border transition-colors ${
                       item === safeCurrentPage
                         ? 'bg-blue-600 text-white border-blue-600'
                         : 'border-gray-300 hover:bg-gray-50'
@@ -186,14 +186,14 @@ export default function TicketList() {
             <button
               onClick={() => { setCurrentPage(p => Math.min(totalPages, p + 1)); setExpandedId(null); }}
               disabled={safeCurrentPage === totalPages}
-              className="px-2 py-1 text-xs rounded border border-gray-300 disabled:opacity-40 hover:bg-gray-50 disabled:hover:bg-white"
+              className="px-2 py-1 text-xs rounded-lg border border-gray-300 disabled:opacity-40 hover:bg-gray-50 disabled:hover:bg-white transition-colors"
             >
               Next
             </button>
             <button
               onClick={() => { setCurrentPage(totalPages); setExpandedId(null); }}
               disabled={safeCurrentPage === totalPages}
-              className="px-2 py-1 text-xs rounded border border-gray-300 disabled:opacity-40 hover:bg-gray-50 disabled:hover:bg-white"
+              className="px-2 py-1 text-xs rounded-lg border border-gray-300 disabled:opacity-40 hover:bg-gray-50 disabled:hover:bg-white transition-colors"
             >
               Last
             </button>

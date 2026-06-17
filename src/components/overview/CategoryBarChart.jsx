@@ -15,7 +15,7 @@ export default function CategoryBarChart() {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4 min-h-[300px]">
       <h3 className="text-sm font-medium text-gray-700 mb-3">Top Issue Categories</h3>
       <ResponsiveContainer width="100%" height={250}>
         <BarChart data={data} layout="vertical">

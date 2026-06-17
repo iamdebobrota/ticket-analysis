@@ -12,11 +12,12 @@ export default function SupportTab() {
 
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-4">
         <KPICard
           title="Tickets with Reopens"
           value={metrics.reopenCount}
           subtitle={`${metrics.totalTickets > 0 ? ((metrics.reopenCount / metrics.totalTickets) * 100).toFixed(1) : 0}% of total`}
+          accent="border-l-red-500"
         />
       </div>
       <AgentComparisonTable />
