@@ -1,6 +1,6 @@
 export default function InsightsSummaryBar({ bugCount, featureCount, uxCount, totalTickets }) {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-3 mb-4 flex items-center gap-4 text-sm">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-3 sm:p-4 mb-4 flex flex-wrap items-center gap-2 sm:gap-4 text-sm">
       <span className="text-gray-600">
         <span className="font-semibold text-red-600">{bugCount}</span> bug reports,{' '}
         <span className="font-semibold text-blue-600">{featureCount}</span> feature requests,{' '}

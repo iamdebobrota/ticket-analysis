@@ -47,14 +47,14 @@ export default function IssueColumn({ title, tickets, color, onOverride }) {
       <h3 className={`text-sm font-semibold mb-3 ${color}`}>{title} ({tickets.length})</h3>
       <div className="space-y-3">
         {clusterList.map(cluster => (
-          <div key={cluster.category} className="bg-white rounded-lg border border-gray-200 p-3">
+          <div key={cluster.category} className="bg-white rounded-lg border border-gray-200 shadow-sm p-3 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-gray-800">{cluster.label}</span>
               <div className="flex items-center gap-2">
                 <span className={`text-xs px-2 py-0.5 rounded-full ${SEVERITY_COLORS[cluster.severity]}`}>
                   {cluster.severity}
                 </span>
-                <span className="text-xs text-gray-400">{cluster.count} tickets</span>
+                <span className="text-xs text-gray-400">{cluster.count}</span>
               </div>
             </div>
             <div className="space-y-1 mb-2">
@@ -64,22 +64,22 @@ export default function IssueColumn({ title, tickets, color, onOverride }) {
             </div>
             <button
               onClick={() => setExpandedCluster(expandedCluster === cluster.category ? null : cluster.category)}
-              className="text-xs text-blue-600 hover:text-blue-800"
+              className="text-xs text-blue-600 hover:text-blue-800 transition-colors"
             >
               {expandedCluster === cluster.category ? 'Collapse' : `View all ${cluster.count} tickets`}
             </button>
             {expandedCluster === cluster.category && (
               <div className="mt-2 border-t border-gray-100 pt-2 space-y-2 max-h-64 overflow-y-auto">
                 {cluster.tickets.map(t => (
-                  <div key={t.id} className="flex items-start gap-2 text-xs">
-                    <div className="flex-1">
+                  <div key={t.id} className="flex flex-col sm:flex-row items-start gap-2 text-xs">
+                    <div className="flex-1 min-w-0">
                       <span className="font-medium">{t.customerName}:</span>{' '}
                       <span className="text-gray-600">{t.initialMessage?.slice(0, 120)}</span>
                     </div>
                     <select
                       value={t.primaryCategory}
                       onChange={(e) => onOverride(t.id, e.target.value)}
-                      className="text-xs border border-gray-200 rounded px-1 py-0.5 flex-shrink-0"
+                      className="text-xs border border-gray-200 rounded-lg px-1.5 py-1 flex-shrink-0 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     >
                       {allCategoryKeys.map(k => (
                         <option key={k} value={k}>{CATEGORIES[k]?.label || k}</option>
