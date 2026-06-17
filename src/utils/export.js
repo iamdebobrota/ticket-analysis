@@ -8,7 +8,7 @@ function formatTime(seconds) {
 function escapeCSV(value) {
   if (value == null) return '';
   const str = String(value);
-  if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+  if (str.includes(',') || str.includes('"') || str.includes('\n') || str.includes('\r')) {
     return `"${str.replace(/"/g, '""')}"`;
   }
   return str;
@@ -44,6 +44,8 @@ export function exportTicketsCSV(tickets) {
   const a = document.createElement('a');
   a.href = url;
   a.download = `tickets-export-${date}.csv`;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
