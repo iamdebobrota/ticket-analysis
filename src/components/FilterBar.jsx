@@ -9,6 +9,7 @@ export default function FilterBar() {
     filters.states.length > 0 ? 1 : 0,
     filters.sourceFile !== 'all' ? 1 : 0,
     filters.category !== 'all' ? 1 : 0,
+    filters.search ? 1 : 0,
   ].reduce((a, b) => a + b, 0);
 
   const handleDateChange = (field, value) => {

@@ -18,6 +18,7 @@ export function DataProvider({ children }) {
     states: [],
     sourceFile: 'all',
     category: 'all',
+    search: '',
   });
 
   const handleFilesUploaded = useCallback(async (files) => {
@@ -50,6 +51,7 @@ export function DataProvider({ children }) {
   }, [tickets, categoryOverrides]);
 
   const filteredTickets = useMemo(() => {
+    const searchLower = filters.search.toLowerCase();
     return processedTickets.filter(t => {
       if (filters.dateRange.start && t.createdAt < filters.dateRange.start) return false;
       if (filters.dateRange.end && t.createdAt > filters.dateRange.end) return false;
@@ -57,6 +59,14 @@ export function DataProvider({ children }) {
       if (filters.states.length > 0 && !filters.states.includes(t.state)) return false;
       if (filters.sourceFile !== 'all' && t.sourceFile !== filters.sourceFile) return false;
       if (filters.category !== 'all' && t.primaryCategory !== filters.category) return false;
+      if (searchLower) {
+        const title = (t.title || '').toLowerCase();
+        const name = (t.customerName || '').toLowerCase();
+        const msg = (t.initialMessage || '').toLowerCase();
+        if (!title.includes(searchLower) && !name.includes(searchLower) && !msg.includes(searchLower)) {
+          return false;
+        }
+      }
       return true;
     });
   }, [processedTickets, filters]);
@@ -102,6 +112,7 @@ export function DataProvider({ children }) {
       states: [],
       sourceFile: 'all',
       category: 'all',
+      search: '',
     });
   }, []);
 
