@@ -59,39 +59,39 @@ export default function FilterBar() {
         </div>
 
         {/* Filter controls */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-1.5">
-            <label className="text-xs font-medium text-gray-500 uppercase">From</label>
+            <label className="text-xs font-medium text-gray-500 uppercase shrink-0">From</label>
             <input
               type="date"
               onChange={(e) => handleDateChange('start', e.target.value)}
-              className="text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+              className="w-full min-w-0 text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div className="flex items-center gap-1.5">
-            <label className="text-xs font-medium text-gray-500 uppercase">To</label>
+            <label className="text-xs font-medium text-gray-500 uppercase shrink-0">To</label>
             <input
               type="date"
               onChange={(e) => handleDateChange('end', e.target.value)}
-              className="text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+              className="w-full min-w-0 text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
             />
           </div>
 
           <select
             value={filters.agent}
             onChange={(e) => updateFilter('agent', e.target.value)}
-            className="text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+            className="col-span-2 sm:col-span-1 w-full sm:w-auto min-w-0 text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
           >
             <option value="all">All Agents</option>
             {agents.map(a => <option key={a} value={a}>{a}</option>)}
           </select>
 
-          <div className="flex items-center gap-1">
+          <div className="col-span-2 sm:col-span-1 flex items-center gap-1">
             {['open', 'closed', 'snoozed'].map(state => (
               <button
                 key={state}
                 onClick={() => handleStateToggle(state)}
-                className={`text-xs px-2.5 py-1.5 rounded-lg border transition-colors ${
+                className={`flex-1 sm:flex-none text-xs px-2.5 py-1.5 rounded-lg border transition-colors ${
                   filters.states.includes(state)
                     ? 'bg-blue-100 border-blue-300 text-blue-700'
                     : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
@@ -105,7 +105,7 @@ export default function FilterBar() {
           <select
             value={filters.sourceFile}
             onChange={(e) => updateFilter('sourceFile', e.target.value)}
-            className="text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+            className="col-span-2 sm:col-span-1 w-full sm:w-auto min-w-0 max-w-full text-sm border border-gray-300 rounded-lg px-2 py-1.5 truncate focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
           >
             <option value="all">All Files</option>
             {fileNames.map(f => <option key={f} value={f}>{f}</option>)}
@@ -114,7 +114,7 @@ export default function FilterBar() {
           <select
             value={filters.category}
             onChange={(e) => updateFilter('category', e.target.value)}
-            className="text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
+            className="col-span-2 sm:col-span-1 w-full sm:w-auto min-w-0 text-sm border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
           >
             <option value="all">All Categories</option>
             {allCategories.map(c => <option key={c} value={c}>{c}</option>)}
@@ -129,10 +129,10 @@ export default function FilterBar() {
             </button>
           )}
 
-          <div className="ml-auto">
+          <div className="col-span-2 sm:col-span-1 sm:ml-auto">
             <button
               onClick={() => exportTicketsCSV(filteredTickets)}
-              className="text-xs sm:text-sm px-3 py-1.5 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-lg text-gray-700 transition-colors flex items-center gap-1.5"
+              className="w-full sm:w-auto text-xs sm:text-sm px-3 py-1.5 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-lg text-gray-700 transition-colors flex items-center justify-center gap-1.5"
             >
               <span>&#11123;</span> Export CSV
             </button>
